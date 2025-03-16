@@ -14,15 +14,15 @@ export default function To__Do_List() {
         setTasks((tasks) => [...tasks, taskName]);
     
         // Add task To Database
-        axios.post("http://127.0.0.1:3000/task/AddTask", taskName).then((res) => {
+        axios.post("http://127.0.0.1:3001/task/AddTask", taskName).then((res) => {
           console.log(res.data);
         });
     }
   }
 
   useEffect(() => {
-    console.log("Hell oWorld");
-    axios.get("http://127.0.0.1:3000/task/getTasks").then((res) => {
+    // Get All Task
+    axios.get("http://127.0.0.1:3001/task/getTasks").then((res) => {
       console.log(res.data);
       setTasks(res.data);
     });
@@ -32,8 +32,9 @@ export default function To__Do_List() {
   // Delete Task
   function handleDeleteTask(e) {
     const TaskId = e.target.parentElement.getAttribute("id");
+    console.log(TaskId);
     e.target.parentElement.remove();
-    axios.delete(`http://127.0.0.1:3000/task/deleteTask/${TaskId}`).then((res) => {
+    axios.delete(`http://127.0.0.1:3001/task/deleteTask/${TaskId}`).then((res) => {
         console.log(res.data);
     });
   }
